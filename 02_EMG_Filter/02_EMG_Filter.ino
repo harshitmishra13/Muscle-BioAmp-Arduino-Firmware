@@ -54,20 +54,18 @@ void loop() {
 	// Sample
 	if(timer < 0){
 		timer += 1000000 / SAMPLE_RATE;
-        // Get analog input value (Raw EMG)
+
+    // Get analog input value (Raw EMG)
 		float sensor_value = analogRead(INPUT_PIN);
-        // Apply the band-stop filter (48 Hz to 52 Hz)
+
+    // Apply the band-stop filter (48 Hz to 52 Hz)
 		float bandstop_filtered = BandStopFilter(sensor_value);
 
 		// Apply the high-pass filter (70 Hz)
 		float highpass_filtered = HighPassFilter(bandstop_filtered);
 
 		// Print the final filtered signal
-		Serial.print(highpass_filtered);
-
-    // Uncomment below 2 lines to compare with raw data
-    // Serial.print(" ");
-    // Serial.println(sensor_value);
+		Serial.println(highpass_filtered);
 	}
 }
 
